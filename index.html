@@ -1,0 +1,365 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>SSL-VC</title>
+		    <style>
+    			.image-container {
+      				display: flex;
+      				justify-content: center;
+    				}
+    			.image-container img {
+      			max-width: 80%; /* 可以根据需要调整图片的最大宽度 */
+      			margin-right: 10px; /* 设置图片之间的间隔 */
+    				}
+    			.image-caption {
+    			font-size: 20px; /* 设置字号 */
+    			font-weight: normal;
+  					}
+ 			 </style>
+		<style>
+  			audio{
+    			width: 175px; /* 设置播放器宽度为 300px */
+  				}
+		</style>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<h1 style="font-size: 50px;">Voice Conversion using Self-Supervised Features and a Multi-Constraints Disentanglement Strategy</h1>
+						<p style="font-size: 35px;">Yuhang Xue, Ning Chen<sup>*</sup>, Yixin Luo, Hongqing Zhu, Zhiying Zhu</p>
+						<p style=" font-size: 25px;">East China University of Science and Technology, Shanghai, 200237, China</p>
+						<p style="font-size: 25px;">*Corresponding author</p>
+					</header>
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Introduction -->
+							<section id="abstract" class="main">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>Abstract</h2>
+										</header>
+										<p style="text-align: justify; font-weight: normal">Voice conversion (VC) is challenging, especially in unseen scenarios.
+											This paper proposes a VC model using self-supervised features and a multi-constraints disentanglement strategy.
+											First, the self-supervised features extracted by specific layers of pre-trained speech processing model WavLM are
+											employed as input for the speaker encoder and the content encoder to improve the model's generalization and simplify
+											their architectures. Second, a multi-constraints disentanglement strategy is proposed to remove redundant information
+											in pre-trained features. Specifically, the Siamese content loss is adopted to mitigate the speaker information leakage
+											issue in content encoding. The margin speaker loss based on AM-Softmax is introduced to alleviate the problem of overlap
+											and fuzzy boundaries between different speakers. The pitch loss and the mel-spectrogram reconstruction loss are adopted
+											to ensure the converted speech's quality. Besides, the generalization strategy employed during the training stage further
+											makes the generated speech more realistic. Experimental results on the VCTK corpus demonstrate that the proposed model achieves
+											excellent performance in objective and subjective evaluations under both seen and unseen scenarios.</p>
+									</div>
+								</div>
+							</section>
+
+							<section id="proposed model" class="main">
+								<div class="spotlight">
+									<div class="content">
+										<header class="major">
+											<h2>Proposed Model</h2>
+									<div class="image-container">
+										<img src="images/proposed_model_revise.jpg" alt="Image1" style="margin-top: 25px"/></img>
+									</div>
+									<div class="image-container"><p class="image-caption">Fig.1: The overall architecture of the proposed model.</p>
+									</div>
+							</section>
+
+						<!-- Second Section -->
+						<section id="converted samples" class="main">
+								<header class="major">
+									<h2 >Converted samples</h2>
+								</header>
+								<p style="font-size: 30px; font-weight: bold">Seen to Seen Conversion</p>
+								<p style="font-size: 25px;">*Note: The demo of Main-VC can be found on <a href="https://main-vc24ijcnn.github.io/" target="_blank"> its page [(Table.1 Traditional Voice Conversion (seen speakers))]</a>.</p>
+								<table>
+									<tr>
+										<td style="vertical-align: middle; font-weight: bold"><center>Type</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Text</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Source</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Target</center>
+									</tr>
+									<tr>
+										<td style="vertical-align: middle;"><center>M-F</center>
+										<td style="vertical-align: middle;"><center>People look, but no one ever finds it.</center>
+										<td style="vertical-align: middle; font-weight: bold"><center><audio controls="controls" source src="demo/source/p255_010.wav" type="audio/wav"></audio></center>
+										<td style="vertical-align: middle; font-weight: bold"><center><audio controls="controls" source src="demo/target/p288_019.wav" type="audio/wav"></audio></center>
+									</tr>
+								</table>
+								<table style="margin-top:-47px;">
+									<tr>
+										<td style="vertical-align: middle; font-weight: bold"><center>Again-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>BetaVAE-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Fragment-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>S2VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Limi-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Proposed</center>
+									</tr>
+									<tr>
+										<td><audio controls="controls" source src="demo/seen/AGAIN-VC/p255_010_to_p288_019.wav" type="audio/wav"></audio>
+										<td><audio controls="controls" source src="demo/seen/BetaVAE/p255_010_to_p288_019.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/seen/Fragment-VC/p255_010_to_p288_019.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/seen/S2VC/p255_010_to_p288_019.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/seen/Limi-VC/p255_010_to_p288_019.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/seen/Proposed/p255_010_to_p288_019.wav" type="audio/wav"></audio>
+									</tr>
+								</table>
+								<div style="margin-bottom:120px;"></div>
+								<table>
+									<tr>
+										<td style="vertical-align: middle; font-weight: bold"><center>Type</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Text</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Source</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Target</center>
+									</tr>
+									<tr>
+										<td style="vertical-align: middle;"><center>F-M</center>
+										<td style="vertical-align: middle;"><center>Others have tried to explain the phenomenon physically.</center>
+										<td style="vertical-align: middle; font-weight: bold"><center><audio controls="controls" source src="demo/source/p249_017.wav" type="audio/wav"></audio></center>
+										<td style="vertical-align: middle; font-weight: bold"><center><audio controls="controls" source src="demo/target/p281_009.wav" type="audio/wav"></audio></center>
+									</tr>
+								</table>
+								<table style="margin-top:-47px;">
+									<tr>
+										<td style="vertical-align: middle; font-weight: bold"><center>Again-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>BetaVAE-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Fragment-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>S2VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Limi-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Proposed</center>
+									</tr>
+									<tr>
+										<td><audio controls="controls" source src="demo/seen/AGAIN-VC/p249_017_to_p281_009.wav" type="audio/wav"></audio>
+										<td><audio controls="controls" source src="demo/seen/BetaVAE/p249_017_to_p281_009.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/seen/Fragment-VC/p249_017_to_p281_009.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/seen/S2VC/p249_017_to_p281_009.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/seen/Limi-VC/p249_017_to_p281_009.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/seen/Proposed/p249_017_to_p281_009.wav" type="audio/wav"></audio>
+									</tr>
+								</table>
+								<div style="margin-bottom:120px;"></div>
+								<table>
+									<tr>
+										<td style="vertical-align: middle; font-weight: bold"><center>Type</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Text</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Source</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Target</center>
+									</tr>
+									<tr>
+										<td style="vertical-align: middle;"><center>M-M</center>
+										<td style="vertical-align: middle;"><center>We also need a small plastic snake and a big toy frog for the kids.</center>
+										<td style="vertical-align: middle; font-weight: bold"><center><audio controls="controls" source src="demo/source/p258_004.wav" type="audio/wav"></audio></center>
+										<td style="vertical-align: middle; font-weight: bold"><center><audio controls="controls" source src="demo/target/p272_015.wav" type="audio/wav"></audio></center>
+									</tr>
+								</table>
+								<table style="margin-top:-47px;">
+									<tr>
+										<td style="vertical-align: middle; font-weight: bold"><center>Again-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>BetaVAE-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Fragment-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>S2VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Limi-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Proposed</center>
+									</tr>
+									<tr>
+										<td><audio controls="controls" source src="demo/seen/AGAIN-VC/p258_004_to_p272_015.wav" type="audio/wav"></audio>
+										<td><audio controls="controls" source src="demo/seen/BetaVAE/p258_004_to_p272_015.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/seen/Fragment-VC/p258_004_to_p272_015.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/seen/S2VC/p258_004_to_p272_015.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/seen/Limi-VC/p258_004_to_p272_015.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/seen/Proposed/p258_004_to_p272_015.wav" type="audio/wav"></audio>
+									</tr>
+								</table>
+								<div style="margin-bottom:120px;"></div>
+								<table>
+									<tr>
+										<td style="vertical-align: middle; font-weight: bold"><center>Type</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Text</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Source</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Target</center>
+									</tr>
+									<tr>
+										<td style="vertical-align: middle;"><center>F-F</center>
+										<td style="vertical-align: middle;"><center>Some have accepted it as a miracle without any physical explanation.</center>
+										<td style="vertical-align: middle; font-weight: bold"><center><audio controls="controls" source src="demo/source/p310_013.wav" type="audio/wav"></audio></center>
+										<td style="vertical-align: middle; font-weight: bold"><center><audio controls="controls" source src="demo/target/p280_004.wav" type="audio/wav"></audio></center>
+									</tr>
+								</table>
+								<table style="margin-top:-47px;">
+									<tr>
+										<td style="vertical-align: middle; font-weight: bold"><center>Again-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>BetaVAE-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Fragment-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>S2VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Limi-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Proposed</center>
+									</tr>
+									<tr>
+										<td><audio controls="controls" source src="demo/seen/AGAIN-VC/p310_013_to_p280_004.wav" type="audio/wav"></audio>
+										<td><audio controls="controls" source src="demo/seen/BetaVAE/p310_013_to_p280_004.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/seen/Fragment-VC/p310_013_to_p280_004.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/seen/S2VC/p310_013_to_p280_004.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/seen/Limi-VC/p310_013_to_p280_004.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/seen/Proposed/p310_013_to_p280_004.wav" type="audio/wav"></audio>
+									</tr>
+								</table>
+								<div style="margin-bottom:150px;"></div>
+								<p style="font-size: 30px; font-weight: bold">Unseen to Unseen Conversion</p>
+								<p style="font-size: 25px;">*Note: The demo of Main-VC can be found on <a href="https://main-vc24ijcnn.github.io/" target="_blank"> its page [Table.2 One-shot Voice Conversion (unseen speakers)]</a>.</p>
+							<table>
+									<tr>
+										<td style="vertical-align: middle; font-weight: bold"><center>Type</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Text</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Source</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Target</center>
+									</tr>
+									<tr>
+										<td style="vertical-align: middle;"><center>M-F</center>
+										<td style="vertical-align: middle;"><center>She can scoop these things into three red bags, and we will go meet her Wednesday at the train station.</center>
+										<td style="vertical-align: middle; font-weight: bold"><center><audio controls="controls" source src="demo/source/p241_005.wav" type="audio/wav"></audio></center>
+										<td style="vertical-align: middle; font-weight: bold"><center><audio controls="controls" source src="demo/target/p234_044.wav" type="audio/wav"></audio></center>
+									</tr>
+								</table>
+								<table style="margin-top:-47px;">
+									<tr>
+										<td style="vertical-align: middle; font-weight: bold"><center>Again-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>BetaVAE-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Fragment-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>S2VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Limi-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Proposed</center>
+									</tr>
+									<tr>
+										<td><audio controls="controls" source src="demo/unseen/AGAIN-VC/p241_005_to_p234_044.wav" type="audio/wav"></audio>
+										<td><audio controls="controls" source src="demo/unseen/BetaVAE/p241_005_to_p234_044.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/unseen/Fragment-VC/p241_005_to_p234_044.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/unseen/S2VC/p241_005_to_p234_044.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/unseen/Limi-VC/p241_005_to_p234_044.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/unseen/Proposed/p241_005_to_p234_044.wav" type="audio/wav"></audio>
+									</tr>
+								</table>
+								<div style="margin-bottom:120px;"></div>
+								<table>
+									<tr>
+										<td style="vertical-align: middle; font-weight: bold"><center>Type</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Text</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Source</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Target</center>
+									</tr>
+									<tr>
+										<td style="vertical-align: middle;"><center>F-M</center>
+										<td style="vertical-align: middle;"><center>So if we can take anything from tonight, it will be fantastic.</center>
+										<td style="vertical-align: middle; font-weight: bold"><center><audio controls="controls" source src="demo/source/p228_026.wav" type="audio/wav"></audio></center>
+										<td style="vertical-align: middle; font-weight: bold"><center><audio controls="controls" source src="demo/target/p245_020.wav" type="audio/wav"></audio></center>
+									</tr>
+								</table>
+								<table style="margin-top:-47px;">
+									<tr>
+										<td style="vertical-align: middle; font-weight: bold"><center>Again-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>BetaVAE-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Fragment-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>S2VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Limi-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Proposed</center>
+									</tr>
+									<tr>
+										<td><audio controls="controls" source src="demo/unseen/AGAIN-VC/p228_026_to_p245_020.wav" type="audio/wav"></audio>
+										<td><audio controls="controls" source src="demo/unseen/BetaVAE/p228_026_to_p245_020.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/unseen/Fragment-VC/p228_026_to_p245_020.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/unseen/S2VC/p228_026_to_p245_020.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/unseen/Limi-VC/p228_026_to_p245_020.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/unseen/Proposed/p228_026_to_p245_020.wav" type="audio/wav"></audio>
+									</tr>
+								</table>
+								<div style="margin-bottom:120px;"></div>
+								<table>
+									<tr>
+										<td style="vertical-align: middle; font-weight: bold"><center>Type</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Text</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Source</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Target</center>
+									</tr>
+									<tr>
+										<td style="vertical-align: middle;"><center>M-M</center>
+										<td style="vertical-align: middle;"><center>People look, but no one ever finds it. </center>
+										<td style="vertical-align: middle; font-weight: bold"><center><audio controls="controls" source src="demo/source/p226_010.wav" type="audio/wav"></audio></center>
+										<td style="vertical-align: middle; font-weight: bold"><center><audio controls="controls" source src="demo/target/p232_008.wav" type="audio/wav"></audio></center>
+									</tr>
+								</table>
+								<table style="margin-top:-47px;">
+									<tr>
+										<td style="vertical-align: middle; font-weight: bold"><center>Again-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>BetaVAE-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Fragment-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>S2VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Limi-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Proposed</center>
+									</tr>
+									<tr>
+										<td><audio controls="controls" source src="demo/unseen/AGAIN-VC/p226_010_to_p232_008.wav" type="audio/wav"></audio>
+										<td><audio controls="controls" source src="demo/unseen/BetaVAE/p226_010_to_p232_008.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/unseen/Fragment-VC/p226_010_to_p232_008.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/unseen/S2VC/p226_010_to_p232_008.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/unseen/Limi-VC/p226_010_to_p232_008.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/unseen/Proposed/p226_010_to_p232_008.wav" type="audio/wav"></audio>
+									</tr>
+								</table>
+								<div style="margin-bottom:120px;"></div>
+								<table>
+									<tr>
+										<td style="vertical-align: middle; font-weight: bold"><center>Type</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Text</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Source</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Target</center>
+									</tr>
+									<tr>
+										<td style="vertical-align: middle;"><center>F-F</center>
+										<td style="vertical-align: middle;"><center>When a man looks for something beyond his reach, his friends say he is looking for the pot of gold at the end of the rainbow.</center>
+										<td style="vertical-align: middle; font-weight: bold"><center><audio controls="controls" source src="demo/source/p225_011.wav" type="audio/wav"></audio></center>
+										<td style="vertical-align: middle; font-weight: bold"><center><audio controls="controls" source src="demo/target/p228_006.wav" type="audio/wav"></audio></center>
+									</tr>
+								</table>
+								<table style="margin-top:-47px;">
+									<tr>
+										<td style="vertical-align: middle; font-weight: bold"><center>Again-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>BetaVAE-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Fragment-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>S2VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Limi-VC</center>
+										<td style="vertical-align: middle; font-weight: bold"><center>Proposed</center>
+									</tr>
+									<tr>
+										<td><audio controls="controls" source src="demo/unseen/AGAIN-VC/p225_011_to_p228_006.wav" type="audio/wav"></audio>
+										<td><audio controls="controls" source src="demo/unseen/BetaVAE/p225_011_to_p228_006.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/unseen/Fragment-VC/p225_011_to_p228_006.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/unseen/S2VC/p225_011_to_p228_006.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/unseen/Limi-VC/p225_011_to_p228_006.wav" type="audio/wav"></audio>
+                              			<td><audio controls="controls" source src="demo/unseen/Proposed/p225_011_to_p228_006.wav" type="audio/wav"></audio>
+									</tr>
+								</table>
+							</section>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<p class="copyright" style="font-style:italic">&copy;Designed by Yuhang Xue</p>
+					</footer>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
