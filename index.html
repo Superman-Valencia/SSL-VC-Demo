@@ -30,9 +30,10 @@
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<h1 style="font-size: 50px;">Voice Conversion using Self-Supervised Features and a Multi-Constraints Disentanglement Strategy</h1>
-						<p style="font-size: 35px;">Yuhang Xue, Ning Chen<sup>*</sup>, Yixin Luo, Hongqing Zhu, Zhiying Zhu</p>
-						<p style=" font-size: 25px;">East China University of Science and Technology, Shanghai, 200237, China</p>
+						<h1 style="font-size: 50px;">Voice Conversion based on Self-Supervised Features and Multi-Constraint Disentanglement Strategy</h1>
+						<p style="font-size: 35px;">Yuhang Xue<sup>1</sup>, Ning Chen<sup>1,*</sup>, Yixin Luo<sup>1</sup>, Hongqing Zhu<sup>1</sup>, Zhiying Zhu<sup>1</sup>, Jie ZHU<sup>2</sup></p>
+						<p style=" font-size: 25px;"><sup>1</sup>East China University of Science and Technology, Shanghai, 200237, China</p>
+						<p style=" font-size: 25px;"><sup>2</sup>Shanghai Jiao Tong University, Shanghai, 200240, China</p>
 						<p style="font-size: 25px;">*Corresponding author</p>
 					</header>
 
@@ -46,17 +47,13 @@
 										<header class="major">
 											<h2>Abstract</h2>
 										</header>
-										<p style="text-align: justify; font-weight: normal">Voice conversion (VC) is challenging, especially in unseen scenarios.
-											This paper proposes a VC model using self-supervised features and a multi-constraints disentanglement strategy.
-											First, the self-supervised features extracted by specific layers of pre-trained speech processing model WavLM are
-											employed as input for the speaker encoder and the content encoder to improve the model's generalization and simplify
-											their architectures. Second, a multi-constraints disentanglement strategy is proposed to remove redundant information
-											in pre-trained features. Specifically, the Siamese content loss is adopted to mitigate the speaker information leakage
-											issue in content encoding. The margin speaker loss based on AM-Softmax is introduced to alleviate the problem of overlap
-											and fuzzy boundaries between different speakers. The pitch loss and the mel-spectrogram reconstruction loss are adopted
-											to ensure the converted speech's quality. Besides, the generalization strategy employed during the training stage further
-											makes the generated speech more realistic. Experimental results on the VCTK corpus demonstrate that the proposed model achieves
-											excellent performance in objective and subjective evaluations under both seen and unseen scenarios.</p>
+										<p style="text-align: justify; font-weight: normal">Enhancing model generalization and achieving sufficient disentanglement among different speech representations are the current focus of voice conversion (VC) research. 
+											To address these challenges, the proposed model adopts self-supervised features and designs a multi-constraint disentanglement strategy.  First, self-supervised features extracted by specific layers of the pre-trained 
+											speech processing model, WavLM, are employed as input for the speaker encoder and the content encoder to improve the model's generalization and simplify their architectures. Second, a multi-constraint disentanglement 
+											strategy is proposed to remove redundant information in pre-trained features. Specifically, the Siamese content loss is adopted to mitigate the speaker information leakage issue in content encoding, and the margin 
+											speaker loss based on AM-Softmax is introduced to alleviate the problem of overlap and fuzzy boundaries among different speakers. The pitch loss and the mel-spectrogram reconstruction loss are adopted to ensure the 
+											quality of the converted speech. Furthermore, the generalization strategy employed during the training stage makes the generated speech more realistic. Experimental results on the VCTK corpus demonstrate that the proposed 
+											model achieves excellent performance in objective and subjective evaluations under both seen and unseen scenarios.</p>
 									</div>
 								</div>
 							</section>
